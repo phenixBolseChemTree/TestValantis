@@ -11,14 +11,14 @@
   margin-left: 8px;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 700px) {
   .root {
     height: 120px;
   }
 }
 
 
-@media (min-width: 1025px) {
+@media (min-width: 1320px) {
   .root {
     height: 130px;
   }

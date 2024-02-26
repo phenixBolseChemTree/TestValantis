@@ -37,7 +37,7 @@
   justify-content: center;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 700px) {
   .Header-container {
     margin-bottom: 34px;
   }
@@ -47,4 +47,4 @@
   }
 }
 
-@media (min-width: 1025px) {}
+@media (min-width: 1320px) {}
