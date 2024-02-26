@@ -1,0 +1,30 @@
+.root {
+  background-color: red;
+  height: 55px;
+  width: 100%;
+}
+
+@media (min-width: 320px) {
+  .root {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+@media (min-width: 744px) {
+
+  .root {
+    position: static;
+    bottom: auto;
+    height: 120px;
+    width: 675px;
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .root {
+    height: 130px;
+    width: 924px;
+  }
+}

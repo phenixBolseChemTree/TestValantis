@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 55px;
+  background-color: #D9D9D9;
+  width: 100%;
+}
+
+.btnPosition {
+  margin-left: 8px;
+}
+
+@media (min-width: 744px) {
+  .root {
+    height: 120px;
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .root {
+    height: 130px;
+  }
+
+  .btnPosition {
+    margin-left: 20px;
+  }
+}
