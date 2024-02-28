@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const params = { offset: 0, limit: 10 };
+      const params = { offset: 0, limit: 15 };
       const ids = await getIDS(params);
       console.log('ids log: ', ids.result); // Установка данных в состояние
 
@@ -33,10 +33,10 @@ function App() {
         <Header />
       </div>
       <div className="SearchSortWidget-container">
-        {JSON.stringify(items)}
+        {/* {JSON.stringify(items)} */}
         <SearchSortWidget />
       </div>
-      <ProductStore />
+      <ProductStore items={items} />
     </div>
   );
 }
