@@ -1,6 +1,7 @@
 .root {
   background-color: green;
   width: 100%;
+  padding: 30px 10px;
 }
 
 @media (min-width: 320px) {
