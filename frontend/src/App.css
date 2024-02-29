@@ -38,12 +38,11 @@
 }
 
 .productStoreContainer {
-  margin-left: 15px;
-  margin-right: 36px;
+  /* margin-left: 60px; */
+  margin-right: 20px;
 }
 
-.loadingImg {
-}
+.loadingImg {}
 
 @media (min-width: 700px) {
   .Header-container {
@@ -53,6 +52,16 @@
   .SearchSortWidget-container {
     margin-bottom: 34px;
   }
+
+  .productStoreContainer {
+    margin-left: 64px;
+    margin-right: 10px;
+  }
 }
 
-@media (min-width: 1320px) {}
+@media (min-width: 1320px) {
+  .productStoreContainer {
+    margin-left: 0;
+    /* margin-right: 36px; */
+  }
+}
