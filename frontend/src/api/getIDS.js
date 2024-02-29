@@ -30,7 +30,7 @@ const getIDS = async (params) => {
     });
     return response.data;
   } catch (error) {
-    console.error('getITEMS: ', error);
+    console.log('getIDS: 500');
   }
 };
 
