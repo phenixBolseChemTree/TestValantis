@@ -35,7 +35,7 @@ const getITEMS = async (ids) => {
     console.log('getITEMS: 500');
 
     // Повторный запрос в случае любых ошибок
-    console.log('Retrying request...');
+    console.log('Retrying request ITEMS...');
     return getITEMS(ids);
   }
 };

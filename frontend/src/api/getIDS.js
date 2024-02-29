@@ -31,6 +31,10 @@ const getIDS = async (params) => {
     return response.data;
   } catch (error) {
     console.log('getIDS: 500');
+
+    console.log('Retrying request IDS...');
+
+    return getIDS(params);
   }
 };
 

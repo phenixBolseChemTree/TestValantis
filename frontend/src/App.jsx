@@ -10,11 +10,11 @@ const ITEMS_PER_PAGE = 50;
 
 function App() {
   const [items, setItems] = useState([]);
-  const [activePage, setActivePage] = useState(0);
+  const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const params = { offset: ITEMS_PER_PAGE * activePage, limit: ITEMS_PER_PAGE };
+      const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
       const ids = await getIDS(params);
       console.log('ids log: ', ids.result);
 

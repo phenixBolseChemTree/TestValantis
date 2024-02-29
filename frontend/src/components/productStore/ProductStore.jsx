@@ -4,10 +4,12 @@ import { PropTypes } from 'prop-types';
 import Grid from '@mui/material/Grid';
 import ProductCard from '../productCard/ProductCard';
 import PaginationRounded from './paginationRounded';
+import loadingImg from '../../img/loading.gif';
 
 const ProductStore = ({ items, setItems, setActivePage, activePage }) => {
   return (
     <div className={styles.root}>
+      {items.length === 0 && <img style={{ width: '70px' }} src={loadingImg} alt="loading" />}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {items.map((item, index) => (
@@ -17,11 +19,13 @@ const ProductStore = ({ items, setItems, setActivePage, activePage }) => {
           ))}
         </Grid>
       </Box>
-      <PaginationRounded
-        setItems={setItems}
-        setActivePage={setActivePage}
-        activePage={activePage}
-      />
+      {items.length > 0 && (
+        <PaginationRounded
+          setItems={setItems}
+          setActivePage={setActivePage}
+          activePage={activePage}
+        />
+      )}
     </div>
   );
 };
