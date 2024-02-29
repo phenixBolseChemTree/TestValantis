@@ -25,6 +25,7 @@ const getIDS = async (params) => {
 
   try {
     const response = await axios.post(url, data, {
+      withCredentials: true, // Добавляем эту опцию
       headers: {
         'X-Auth': authString
       }
