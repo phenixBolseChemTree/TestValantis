@@ -10,7 +10,8 @@ const createAuthString = (password) => {
 };
 
 const getIDS = async (params) => {
-  const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
+  // const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
+  const password = 'Valantis';
   const url = 'http://api.valantis.store:40000/';
   const authString = createAuthString(password);
 
