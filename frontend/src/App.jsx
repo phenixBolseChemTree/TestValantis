@@ -18,11 +18,11 @@ function App() {
       setLoading(true);
       const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
       const ids = await getIDS(params);
-      console.log('ids log: ', ids.result);
+      // console.log('ids log: ', ids.result);
 
       const itemsData = await getITEMS(ids.result);
       const { result } = itemsData;
-      console.log('items log: ', itemsData);
+      // console.log('items log: ', itemsData);
 
       setItems(result);
       setLoading(false);

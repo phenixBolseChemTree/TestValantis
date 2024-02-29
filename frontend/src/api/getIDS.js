@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import md5 from 'js-md5';
@@ -9,7 +10,7 @@ const createAuthString = (password) => {
 };
 
 const getIDS = async (params) => {
-  const password = 'Valantis';
+  const password = process.env.REACT_APP_VALANTIS_PASS;
   const url = 'http://api.valantis.store:40000/';
   const authString = createAuthString(password);
 

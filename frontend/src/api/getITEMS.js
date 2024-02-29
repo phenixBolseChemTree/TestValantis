@@ -1,6 +1,9 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import md5 from 'js-md5';
+// import process from 'process';
+// require('dotenv').config();
 
 function createAuthString(password) {
   const date = new Date();
@@ -9,7 +12,9 @@ function createAuthString(password) {
 }
 
 const getITEMS = async (ids) => {
-  const password = 'Valantis'; // Пароль для доступа к API
+  const password = process.env.REACT_APP_VALANTIS_PASS; // Пароль для доступа к API
+  // const password = process.env.VALANTIS_PASS;
+  // console.log('process.env', process.env);
   const url = 'http://api.valantis.store:40000/'; // URL API
   const authString = createAuthString(password); // Строка авторизации
 
