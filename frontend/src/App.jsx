@@ -6,26 +6,28 @@ import SearchSortWidget from './components/searchSortWidget';
 import getIDS from './api/getIDS';
 import getITEMS from './api/getITEMS';
 
+const ITEMS_PER_PAGE = 15;
+const OFFSET_POSITION = 0;
+
 function App() {
   const [items, setItems] = useState([]);
+  // const [activePage, setActivePage] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const params = { offset: 0, limit: 15 };
+      const params = { offset: OFFSET_POSITION, limit: ITEMS_PER_PAGE };
       const ids = await getIDS(params);
-      console.log('ids log: ', ids.result); // Установка данных в состояние
+      console.log('ids log: ', ids.result);
 
       const itemsData = await getITEMS(ids.result);
       const { result } = itemsData;
       console.log('result12', result);
-      console.log('items log: ', itemsData); // Установка данных в состояние
+      console.log('items log: ', itemsData);
 
       setItems(result);
     };
 
     fetchData();
-
-    // console.log('результат fetch data', w);
   }, []);
   return (
     <div className="App">
@@ -36,7 +38,7 @@ function App() {
         {/* {JSON.stringify(items)} */}
         <SearchSortWidget />
       </div>
-      <ProductStore items={items} />
+      <ProductStore items={items} setItems={setItems} />
     </div>
   );
 }
