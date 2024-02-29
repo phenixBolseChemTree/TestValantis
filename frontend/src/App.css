@@ -37,6 +37,16 @@
   justify-content: center;
 }
 
+.productStoreContainer {
+  /* background-color: red; */
+
+  margin-left: 15px;
+  margin-right: 36px;
+}
+
+.loadingImg {
+}
+
 @media (min-width: 700px) {
   .Header-container {
     margin-bottom: 34px;
