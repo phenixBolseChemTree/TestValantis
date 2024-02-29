@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-// import Header from './components/header';
 import ProductStore from './components/productStore';
 import SearchSortWidget from './components/searchSortWidget';
 import getIDS from './api/getIDS';
 import loadingImg from './img/loading.gif';
 import getITEMS from './api/getITEMS';
-// import
 
 const ITEMS_PER_PAGE = 50;
 
@@ -24,7 +22,6 @@ function App() {
 
       const itemsData = await getITEMS(ids.result);
       const { result } = itemsData;
-      // console.log('result12', result);
       console.log('items log: ', itemsData);
 
       setItems(result);
@@ -36,7 +33,6 @@ function App() {
   return (
     <div className="App">
       <div className="SearchSortWidget-container">
-        {/* {JSON.stringify(items)} */}
         <SearchSortWidget />
       </div>
       {loading && (
