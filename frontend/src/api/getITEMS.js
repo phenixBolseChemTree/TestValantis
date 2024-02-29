@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry'; // Импортируйте axios-retry
 import md5 from 'js-md5';
 
 // Функция для создания строки авторизации
@@ -19,6 +20,9 @@ const getITEMS = async (ids) => {
     params: { ids: [...ids] }
   };
 
+  // Включение механизма повтора с максимальным количеством попыток 3
+  axiosRetry(axios, { retries: 5 });
+
   try {
     const response = await axios.post(url, data, {
       headers: {
@@ -28,7 +32,7 @@ const getITEMS = async (ids) => {
     // console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('getITEMS: ', error);
   }
 };
 
