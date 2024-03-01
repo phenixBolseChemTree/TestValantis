@@ -35,7 +35,7 @@ const postIDS = async (params) => {
 
     console.log('Retrying request IDS...');
 
-    return getIDS(params);
+    return postIDS(params);
   }
 };
 
