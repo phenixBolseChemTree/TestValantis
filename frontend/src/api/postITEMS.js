@@ -42,7 +42,7 @@ const postITEMS = async (ids) => {
 
     // Повторный запрос в случае любых ошибок
     console.log('Retrying request ITEMS...');
-    return getITEMS(ids);
+    return postITEMS(ids);
   }
 };
 
