@@ -11,7 +11,7 @@ function createAuthString(password) {
   return md5(`${password}_${timestamp}`);
 }
 
-const getITEMS = async (ids) => {
+const postITEMS = async (ids) => {
   // const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis'; // Пароль для доступа к API
   const password = 'Valantis';
   // const password = process.env.VALANTIS_PASS;
@@ -29,7 +29,6 @@ const getITEMS = async (ids) => {
 
   try {
     const response = await axios.post(url, data, {
-      withCredentials: true, // Добавляем эту опцию
       headers: {
         'X-Auth': authString
       }
@@ -47,4 +46,4 @@ const getITEMS = async (ids) => {
   }
 };
 
-export default getITEMS;
+export default postITEMS;

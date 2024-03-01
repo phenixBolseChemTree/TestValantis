@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import ProductStore from './components/productStore';
 import SearchSortWidget from './components/searchSortWidget';
-import getIDS from './api/getIDS';
+import postIDS from './api/postIDS';
 import loadingImg from './img/loading.gif';
-import getITEMS from './api/getITEMS';
+import postITEMS from './api/postITEMS';
 
 const ITEMS_PER_PAGE = 50;
 
@@ -17,10 +17,10 @@ function App() {
     const fetchData = async () => {
       setLoading(true);
       const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-      const ids = await getIDS(params);
+      const ids = await postIDS(params);
       // console.log('ids log: ', ids.result);
 
-      const itemsData = await getITEMS(ids.result);
+      const itemsData = await postITEMS(ids.result);
       const { result } = itemsData;
       // console.log('items log: ', itemsData);
 

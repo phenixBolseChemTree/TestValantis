@@ -14,6 +14,9 @@ const ProductCard = ({ item }) => {
         <Typography sx={{ fontSize: 20 }} component="div">
           {item.product}
         </Typography>
+        <Typography sx={{ fontSize: 10, color: 'brown' }} component="div">
+          {item.brand}
+        </Typography>
         <Typography variant="subtitle1">{item.price}</Typography>
       </CardContent>
     </Card>
