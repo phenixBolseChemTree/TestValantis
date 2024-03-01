@@ -31,9 +31,9 @@ const postIDS = async (params) => {
     });
     return response.data;
   } catch (error) {
-    console.log('getIDS: 500');
+    // console.log('postIDS: 500');
 
-    console.log('Retrying request IDS...');
+    // console.log('Retrying request IDS...');
 
     return postIDS(params);
   }

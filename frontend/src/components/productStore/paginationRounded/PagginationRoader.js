@@ -6,7 +6,7 @@ import styles from './paginationRounded.module.css';
 
 const PaginationRounded = ({ setActivePage, activePage, loading }) => {
   const handleChange = (event, value) => {
-    console.log('activePage! ', activePage);
+    // console.log('activePage! ', activePage);
     if (activePage !== value || !loading) {
       window.scrollTo({ top: 0 });
       setActivePage(value);

@@ -5,6 +5,7 @@ import SearchSortWidget from './components/searchSortWidget';
 import postIDS from './api/postIDS';
 import loadingImg from './img/loading.gif';
 import postITEMS from './api/postITEMS';
+import postFIELD from './api/postFIELD';
 
 const ITEMS_PER_PAGE = 50;
 
@@ -23,6 +24,8 @@ function App() {
       const itemsData = await postITEMS(ids.result);
       const { result } = itemsData;
       // console.log('items log: ', itemsData);
+
+      postFIELD();
 
       setItems(result);
       setLoading(false);

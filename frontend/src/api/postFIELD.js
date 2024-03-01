@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import md5 from 'js-md5';
@@ -11,7 +10,7 @@ function createAuthString(password) {
   return md5(`${password}_${timestamp}`);
 }
 
-const postITEMS = async (ids) => {
+const postFIELD = async (ids) => {
   // const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis'; // Пароль для доступа к API
   const password = 'Valantis';
   // const password = process.env.VALANTIS_PASS;
@@ -20,8 +19,8 @@ const postITEMS = async (ids) => {
   const authString = createAuthString(password); // Строка авторизации
 
   const data = {
-    action: 'get_items',
-    params: { ids: [...ids] }
+    action: 'get_fields',
+    params: { field: 'brand', offset: 3, limit: 5 }
   };
 
   // Используйте axiosRetry для автоматической попытки повторного запроса при ошибке
@@ -33,17 +32,17 @@ const postITEMS = async (ids) => {
         'X-Auth': authString
       }
     });
-
+    console.log('!!!123 ', response.data);
     // Возвращение данных в случае успешного ответа
     return response.data;
   } catch (error) {
     // Дополнительная логика обработки ошибок, если необходимо
-    // console.log('postITEMS: 500');
+    console.log('postFIELD: 500');
 
     // Повторный запрос в случае любых ошибок
-    // console.log('Retrying request ITEMS...');
-    return postITEMS(ids);
+    console.log('Retrying request FIELD...');
+    return postFIELD(ids);
   }
 };
 
-export default postITEMS;
+export default postFIELD;
