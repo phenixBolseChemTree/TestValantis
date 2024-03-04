@@ -11,8 +11,8 @@ function createAuthString(password) {
 }
 
 const postFIELD = async (ids) => {
-  // const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis'; // Пароль для доступа к API
-  const password = 'Valantis';
+  const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis'; // Пароль для доступа к API
+  // const password = 'Valantis';
   // const password = process.env.VALANTIS_PASS;
   // console.log('process.env', process.env);
   const url = 'http://api.valantis.store:40000/'; // URL API
@@ -33,7 +33,6 @@ const postFIELD = async (ids) => {
       }
     });
     console.log('!!!123 ', response.data);
-    // Возвращение данных в случае успешного ответа
     return response.data;
   } catch (error) {
     // Дополнительная логика обработки ошибок, если необходимо

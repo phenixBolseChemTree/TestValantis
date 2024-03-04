@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import md5 from 'js-md5';
+import md5 from 'md5';
 
 const createAuthString = (password) => {
   const date = new Date();
