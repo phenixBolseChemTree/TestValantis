@@ -10,6 +10,7 @@
 @media (min-width: 320px) {
   .root {
     position: fixed;
+    height: 88px;
     bottom: 0;
   }
 }
