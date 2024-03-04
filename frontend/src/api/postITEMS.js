@@ -11,10 +11,7 @@ function createAuthString(password) {
 }
 
 const postITEMS = async (ids) => {
-  // const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis'; // Пароль для доступа к API
-  const password = 'Valantis';
-  // const password = process.env.VALANTIS_PASS;
-  // console.log('process.env', process.env);
+  const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
   const url = 'http://api.valantis.store:40000/'; // URL API
   const authString = createAuthString(password); // Строка авторизации
 

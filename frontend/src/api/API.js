@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import md5 from 'md5';
+import md5 from 'js-md5';
 
 const createAuthString = (password) => {
   const date = new Date();
@@ -8,16 +8,21 @@ const createAuthString = (password) => {
   return md5(`${password}_${timestamp}`);
 };
 
-const postIDS = async (params) => {
-  const password = process.env.REACT_APP_VALANTIS_PASS;
-  // const password = 'Valantis';
-  const url = 'http://api.valantis.store:40000/';
-  const authString = createAuthString(password);
+const url = 'http://api.valantis.store:40000/';
+const password = process.env.REACT_APP_VALANTIS_PASS;
+const authString = createAuthString(password);
 
-  const data = {
-    action: 'get_ids',
-    params
-  };
+const postIDS = async (restFunc, params) => {
+  const data = {};
+  if (restFunc === 'get_ids') {
+    // {...data, action: 'get_ids', params };
+    data.action = 'get_ids';
+    data.params = params;
+  }
+  if (restFunc === 'get_items') {
+    data.action = 'get_id';
+    data.params = params;
+  }
 
   // Включение механизма повтора 5 раз
   axiosRetry(axios, { retries: 5 });
@@ -30,7 +35,7 @@ const postIDS = async (params) => {
     });
     return response.data;
   } catch (error) {
-    // console.log('postIDS: 500');
+    console.log('postIDS: 500'); // потом возвращать всю ошибку, сейчас так что бы логи не засорять
 
     // console.log('Retrying request IDS...');
 
