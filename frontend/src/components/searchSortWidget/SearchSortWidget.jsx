@@ -26,7 +26,7 @@ const SearchSortWidget = ({ setInput }) => {
       <form style={{ width: '85%' }} noValidate autoComplete="off">
         <TextField
           id="outlined-basic"
-          label="Введите текст"
+          label="Введите название товара"
           variant="outlined"
           fullWidth
           value={searchText}

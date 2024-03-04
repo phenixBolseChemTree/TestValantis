@@ -17,20 +17,19 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       if (!input) {
+        setLoading(true);
         const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
         const ids = await postIDS(params);
         const { result } = await postITEMS(ids.result);
         setItems(result);
       } else {
-        // params = { product: input };
         const ids = await postFILTER(input);
-        // console.log('ids!!!', ids);
-        if (ids.length !== 0) {
-          // взять нужные 50 постов через формулу
+        if (ids.result.length !== 0) {
+          setLoading(true);
+
           const x = ITEMS_PER_PAGE * (activePage - 1); // точка отсчета
-          const y = 50; // точка конца
+          const y = ITEMS_PER_PAGE * (activePage - 1) + 50; // точка конца
           const idsSlice = ids.result.slice(x, y);
           console.log('ids.result!!!', ids.result);
           console.log('idsSlice!!!', idsSlice);
