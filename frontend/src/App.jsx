@@ -5,7 +5,7 @@ import SearchSortWidget from './components/searchSortWidget';
 import postIDS from './api/postIDS';
 import loadingImg from './img/loading.gif';
 import postITEMS from './api/postITEMS';
-import postFIELD from './api/postFIELD';
+import postFILTER from './api/postFILTER';
 
 const ITEMS_PER_PAGE = 50;
 
@@ -13,30 +13,41 @@ function App() {
   const [items, setItems] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-      const ids = await postIDS(params);
-      // console.log('ids log: ', ids.result);
-
-      const itemsData = await postITEMS(ids.result);
-      const { result } = itemsData;
-      // console.log('items log: ', itemsData);
-
-      postFIELD();
-
-      setItems(result);
+      if (!input) {
+        const params = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
+        const ids = await postIDS(params);
+        const { result } = await postITEMS(ids.result);
+        setItems(result);
+      } else {
+        // params = { product: input };
+        const ids = await postFILTER(input);
+        // console.log('ids!!!', ids);
+        if (ids.length !== 0) {
+          // взять нужные 50 постов через формулу
+          const x = ITEMS_PER_PAGE * (activePage - 1); // точка отсчета
+          const y = 50; // точка конца
+          const idsSlice = ids.result.slice(x, y);
+          console.log('ids.result!!!', ids.result);
+          console.log('idsSlice!!!', idsSlice);
+          const { result } = await postITEMS(idsSlice);
+          setItems(result);
+        }
+      }
+      // setItems(result);
       setLoading(false);
     };
 
     fetchData();
-  }, [activePage]);
+  }, [activePage, input]);
   return (
     <div className="App">
       <div className="SearchSortWidget-container">
-        <SearchSortWidget />
+        <SearchSortWidget input={input} setInput={setInput} />
       </div>
       {loading && (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

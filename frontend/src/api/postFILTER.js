@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import md5 from 'md5';
+import md5 from 'js-md5';
 
 const createAuthString = (password) => {
   const date = new Date();
@@ -8,15 +8,14 @@ const createAuthString = (password) => {
   return md5(`${password}_${timestamp}`);
 };
 
-const postIDS = async (params) => {
+const postFILTER = async (input) => {
   const password = process.env.REACT_APP_VALANTIS_PASS;
-  // const password = 'Valantis';
   const url = 'http://api.valantis.store:40000/';
   const authString = createAuthString(password);
 
   const data = {
-    action: 'get_ids',
-    params
+    action: 'filter',
+    params: { product: input, offset: 0, limit: 50 }
   };
 
   // Включение механизма повтора 5 раз
@@ -28,14 +27,13 @@ const postIDS = async (params) => {
         'X-Auth': authString
       }
     });
+    console.log('123456789', response.data);
     return response.data;
   } catch (error) {
-    // console.log('postIDS: 500');
+    console.log('postFILTER: 500');
 
-    // console.log('Retrying request IDS...');
-
-    return postIDS(params);
+    return postFILTER(input);
   }
 };
 
-export default postIDS;
+export default postFILTER;
