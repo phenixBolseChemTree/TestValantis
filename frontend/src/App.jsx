@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import ProductStore from './components/productStore';
 import SearchSortWidget from './components/searchSortWidget';
-import postIDS from './api/postIDS';
 import loadingImg from './img/loading.gif';
+import postIDS from './api/postIDS';
 import postITEMS from './api/postITEMS';
 import postFILTER from './api/postFILTER';
 
@@ -27,10 +27,9 @@ function App() {
         const ids = await postFILTER(input);
         if (ids.result.length !== 0) {
           setLoading(true);
-
-          const x = ITEMS_PER_PAGE * (activePage - 1); // точка отсчета
-          const y = ITEMS_PER_PAGE * (activePage - 1) + 50; // точка конца
-          const idsSlice = ids.result.slice(x, y);
+          const startSlice = ITEMS_PER_PAGE * (activePage - 1);
+          const endSlice = startSlice + 50;
+          const idsSlice = ids.result.slice(startSlice, endSlice);
           console.log('ids.result!!!', ids.result);
           console.log('idsSlice!!!', idsSlice);
           const { result } = await postITEMS(idsSlice);

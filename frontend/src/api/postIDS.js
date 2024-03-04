@@ -18,7 +18,6 @@ const postIDS = async (params) => {
     params
   };
 
-  // Включение механизма повтора 5 раз
   axiosRetry(axios, { retries: 5 });
 
   try {
@@ -29,9 +28,7 @@ const postIDS = async (params) => {
     });
     return response.data;
   } catch (error) {
-    // console.log('postIDS: 500');
-
-    // console.log('Retrying request IDS...');
+    console.log('postIDS: 500');
 
     return postIDS(params);
   }

@@ -18,7 +18,6 @@ const postFILTER = async (input) => {
     params: { product: input, offset: 0, limit: 50 }
   };
 
-  // Включение механизма повтора 5 раз
   axiosRetry(axios, { retries: 5 });
 
   try {
