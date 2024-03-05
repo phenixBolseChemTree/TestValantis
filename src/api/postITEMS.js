@@ -29,6 +29,7 @@ const postITEMS = async (ids) => {
     });
     return response.data;
   } catch (error) {
+    console.log('countConnect postFILTER: ', countConnect);
     console.log('postITEMS: ', error);
     countConnect += 1;
     return postITEMS(ids);

@@ -8,7 +8,6 @@ const postFILTER = async (input, inputKey) => {
   if (countConnect === 5) {
     return [];
   }
-  console.log('countConnect postFILTER: ', countConnect);
 
   const password = process.env.REACT_APP_VALANTIS_PASS;
   const url = process.env.REACT_APP_API_URL;
@@ -30,7 +29,8 @@ const postFILTER = async (input, inputKey) => {
     console.log('response!!!', response.data);
     return response.data;
   } catch (error) {
-    console.log('postFILTER: 500');
+    console.log('countConnect postFILTER: ', countConnect);
+    console.log('postFILTER: ', error);
     countConnect += 1;
     return postFILTER(input);
   }

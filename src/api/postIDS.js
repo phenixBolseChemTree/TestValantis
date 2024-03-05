@@ -8,7 +8,6 @@ const postIDS = async (params) => {
   if (countConnect === 5) {
     return [];
   }
-  console.log('countConnect postIDS: ', countConnect);
 
   const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
   const url = process.env.REACT_APP_API_URL;
@@ -30,6 +29,7 @@ const postIDS = async (params) => {
     });
     return response.data;
   } catch (error) {
+    console.log('countConnect postIDS: ', countConnect);
     console.log('postIDS: ', error);
 
     countConnect += 1;
