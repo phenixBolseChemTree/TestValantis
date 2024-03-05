@@ -16,7 +16,7 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://phenixBolseChemTree.github.io/TestValantis",
+  "homepage": "https://phenixbolsechemtree.github.io/TestValantis/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
