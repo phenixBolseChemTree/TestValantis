@@ -8,14 +8,15 @@ const createAuthString = (password) => {
   return md5(`${password}_${timestamp}`);
 };
 
-const postFILTER = async (input) => {
+const postFILTER = async (input, inputKey) => {
   const password = process.env.REACT_APP_VALANTIS_PASS;
   const url = 'http://api.valantis.store:40000/';
   const authString = createAuthString(password);
-
+  // console.log('!!!input', input);
+  console.log('!!!inputKey', inputKey, input);
   const data = {
     action: 'filter',
-    params: { product: input, offset: 0, limit: 50 }
+    params: { [inputKey]: input }
   };
 
   axiosRetry(axios, { retries: 5 });
@@ -26,7 +27,7 @@ const postFILTER = async (input) => {
         'X-Auth': authString
       }
     });
-    console.log('123456789', response.data);
+    console.log('response!!!', response.data);
     return response.data;
   } catch (error) {
     console.log('postFILTER: 500');

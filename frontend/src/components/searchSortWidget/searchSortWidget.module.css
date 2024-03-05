@@ -1,16 +1,19 @@
 .root {
-  background-color: rgb(196, 196, 196);
-  height: 55px;
+  /* background-color: rgb(196, 196, 196); */
+  height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  display: flex;
+  /* background-color: red; */
 }
 
 @media (min-width: 320px) {
   .root {
     position: fixed;
-    height: 88px;
+    height: 100px;
     bottom: 0;
   }
 }
