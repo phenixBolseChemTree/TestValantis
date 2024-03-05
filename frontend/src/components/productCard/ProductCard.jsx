@@ -11,10 +11,10 @@ const ProductCard = ({ item }) => {
         <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
           {item.id}
         </Typography>
-        <Typography sx={{ fontSize: 20 }} component="div">
+        <Typography sx={{ fontSize: 14 }} component="div">
           {item.product}
         </Typography>
-        <Typography sx={{ fontSize: 10, color: 'brown' }} component="div">
+        <Typography sx={{ fontSize: 14, color: 'brown' }} component="div">
           {item.brand}
         </Typography>
         <Typography variant="subtitle1">{item.price}</Typography>
