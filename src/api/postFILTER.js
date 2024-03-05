@@ -1,8 +1,15 @@
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
+// import axiosRetry from 'axios-retry';
 import createAuthString from './createAuthString';
 
+let countConnect = 0;
+
 const postFILTER = async (input, inputKey) => {
+  if (countConnect === 5) {
+    return [];
+  }
+  console.log('countConnect postFILTER: ', countConnect);
+
   const password = process.env.REACT_APP_VALANTIS_PASS;
   const url = process.env.REACT_APP_API_URL;
 
@@ -12,7 +19,7 @@ const postFILTER = async (input, inputKey) => {
     params: { [inputKey]: input }
   };
 
-  axiosRetry(axios, { retries: 5 });
+  // axiosRetry(axios, { retries: 5 });
 
   try {
     const response = await axios.post(url, data, {
@@ -24,7 +31,7 @@ const postFILTER = async (input, inputKey) => {
     return response.data;
   } catch (error) {
     console.log('postFILTER: 500');
-
+    countConnect += 1;
     return postFILTER(input);
   }
 };
