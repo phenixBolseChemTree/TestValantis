@@ -1,16 +1,11 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import md5 from 'js-md5';
-
-const createAuthString = (password) => {
-  const date = new Date();
-  const timestamp = `${date.getUTCFullYear()}${(date.getUTCMonth() + 1).toString().padStart(2, '0')}${date.getUTCDate().toString().padStart(2, '0')}`;
-  return md5(`${password}_${timestamp}`);
-};
+import createAuthString from './createAuthString';
 
 const postFILTER = async (input, inputKey) => {
   const password = process.env.REACT_APP_VALANTIS_PASS;
-  const url = 'http://api.valantis.store:40000/';
+  const url = process.env.REACT_APP_API_URL;
+
   const authString = createAuthString(password);
   const data = {
     action: 'filter',

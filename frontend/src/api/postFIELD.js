@@ -1,18 +1,11 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import md5 from 'js-md5';
-// import process from 'process';
-// require('dotenv').config();
-
-function createAuthString(password) {
-  const date = new Date();
-  const timestamp = `${date.getUTCFullYear()}${(date.getUTCMonth() + 1).toString().padStart(2, '0')}${date.getUTCDate().toString().padStart(2, '0')}`;
-  return md5(`${password}_${timestamp}`);
-}
+import createAuthString from './createAuthString';
 
 const postFIELD = async (ids) => {
   const password = process.env.REACT_APP_VALANTIS_PASS;
-  const url = 'http://api.valantis.store:40000/';
+  const url = process.env.REACT_APP_API_URL;
+
   const authString = createAuthString(password);
 
   const data = {
@@ -28,12 +21,10 @@ const postFIELD = async (ids) => {
         'X-Auth': authString
       }
     });
-    console.log('!!!123 ', response.data);
     return response.data;
   } catch (error) {
-    console.log('postFIELD: 500');
+    console.log('postFIELD: ', error);
 
-    console.log('Retrying request FIELD...');
     return postFIELD(ids);
   }
 };
