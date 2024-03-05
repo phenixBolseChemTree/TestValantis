@@ -1,4 +1,5 @@
 {
+  "homepage": "https://testvalantis.github.io/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -27,6 +28,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -61,6 +64,7 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
     "react-error-overlay": "^6.0.9",
     "webpack-node-externals": "^3.0.0"
