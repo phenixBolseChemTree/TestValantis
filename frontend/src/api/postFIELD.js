@@ -24,7 +24,6 @@ const postFIELD = async (ids) => {
     return response.data;
   } catch (error) {
     console.log('postFIELD: ', error);
-
     return postFIELD(ids);
   }
 };

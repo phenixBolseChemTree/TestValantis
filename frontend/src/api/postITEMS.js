@@ -1,11 +1,11 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import createAuthString from './func/createAuthString';
+import createAuthString from './createAuthString';
 
 const postITEMS = async (ids) => {
   const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
-  const url = process.env.REACT_APP_API_URL;
-  const authString = createAuthString(password);
+  const url = 'http://api.valantis.store:40000/'; // URL API
+  const authString = createAuthString(password); // Строка авторизации
 
   const data = {
     action: 'get_items',
@@ -23,7 +23,6 @@ const postITEMS = async (ids) => {
     return response.data;
   } catch (error) {
     console.log('postITEMS: ', error);
-
     return postITEMS(ids);
   }
 };
