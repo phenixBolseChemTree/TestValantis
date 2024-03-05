@@ -13,6 +13,13 @@ const isNumeric = (n) => !isNaN(parseFloat(n)) && isFinite(n);
 
 const hasNoCyrillic = (str) => !/[\u0400-\u04FF]/.test(str);
 
+const filterUniqueById = (array) => {
+  return array.filter((obj, index, self) => {
+    const firstIndex = self.findIndex((item) => item.id === obj.id);
+    return index === firstIndex;
+  });
+};
+
 function App() {
   const [items, setItems] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -26,32 +33,26 @@ function App() {
         const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
         const ids = await postIDS(paramsCastome);
         const { result } = await postITEMS(ids.result);
-        setItems(result);
+
+        setItems(filterUniqueById(result));
       } else {
         let ids;
-        // определяем что мы ищем через product brand price
         if (isNumeric(input)) {
-          // console.log('Я НА ВЕРНОМ ПУТИ!!!');
           ids = await postFILTER(Number(input), 'price');
         } else if (hasNoCyrillic(input)) {
           ids = await postFILTER(input, 'brand');
         } else {
           ids = await postFILTER(input, 'product');
         }
-        // закончили
-        // ids = await postFILTER(input, inputKey);
         if (ids.result.length !== 0) {
           setLoading(true);
           const startSlice = ITEMS_PER_PAGE * (activePage - 1);
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
-          console.log('ids.result!!!', ids.result);
-          console.log('idsSlice!!!', idsSlice);
           const { result } = await postITEMS(idsSlice);
-          setItems(result);
+          setItems(filterUniqueById(result));
         }
       }
-      // setItems(result);
       setLoading(false);
     };
 

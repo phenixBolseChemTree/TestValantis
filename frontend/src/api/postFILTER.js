@@ -12,8 +12,6 @@ const postFILTER = async (input, inputKey) => {
   const password = process.env.REACT_APP_VALANTIS_PASS;
   const url = 'http://api.valantis.store:40000/';
   const authString = createAuthString(password);
-  // console.log('!!!input', input);
-  console.log('!!!inputKey', inputKey, input);
   const data = {
     action: 'filter',
     params: { [inputKey]: input }

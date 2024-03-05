@@ -12,7 +12,6 @@ const SearchSortWidget = ({ setInput }) => {
 
     clearTimeout(timeoutId);
 
-    // Установка задержки в 1000 миллисекунд (1 секунда)
     const newTimeoutId = setTimeout(() => {
       setInput(newValue);
     }, 1000);
