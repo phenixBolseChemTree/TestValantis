@@ -10,7 +10,7 @@ const postIDS = async (params) => {
 
   const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
   // const url = process.env.REACT_APP_API_URL;
-  const url = 'http://api.valantis.store:40000/';
+  const url = 'https://api.valantis.store:41000/';
 
   const authString = createAuthString(password);
 
