@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import axiosRetry from 'axios-retry';
 import createAuthString from './createAuthString';
 
 let countConnect = 0;
@@ -19,8 +18,6 @@ const postIDS = async (params) => {
     params
   };
 
-  // axiosRetry(axios, { retries: 5 });
-
   try {
     const response = await axios.post(url, data, {
       headers: {
@@ -30,7 +27,7 @@ const postIDS = async (params) => {
     return response.data;
   } catch (error) {
     console.log('countConnect postIDS: ', countConnect);
-    console.log('postIDS: ', error);
+    console.log('error postIDS: ', error);
 
     countConnect += 1;
     return postIDS(params);
