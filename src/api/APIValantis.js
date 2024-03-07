@@ -1,21 +1,18 @@
 import axios from 'axios';
 import createAuthString from './createAuthString';
 
-let countConnect = 0;
+// остается
+const password = process.env.REACT_APP_VALANTIS_PASS;
+const url = process.env.REACT_APP_API_URL;
 
-const postFILTER = async (input, inputKey) => {
+let countConnect = 0;
+const authString = createAuthString(password);
+
+// method строка а data это параметры
+const postFILTER = async (data) => {
   if (countConnect === 5) {
     return [];
   }
-
-  const password = process.env.REACT_APP_VALANTIS_PASS;
-  const url = process.env.REACT_APP_API_URL;
-
-  const authString = createAuthString(password);
-  const data = {
-    action: 'filter',
-    params: { [inputKey]: input }
-  };
 
   try {
     const response = await axios.post(url, data, {

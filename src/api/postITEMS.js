@@ -10,8 +10,8 @@ const postITEMS = async (ids) => {
 
   console.log('countConnect postITEMS: ', countConnect);
   const password = process.env.REACT_APP_VALANTIS_PASS || 'Valantis';
-  // const url = process.env.REACT_APP_API_URL;
-  const url = 'https://api.valantis.store:41000/';
+  const url = process.env.REACT_APP_API_URL;
+  // const url = 'https://api.valantis.store:41000/';
 
   const authString = createAuthString(password); // Строка авторизации
 
