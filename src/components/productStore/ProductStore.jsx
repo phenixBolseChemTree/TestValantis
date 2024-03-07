@@ -2,7 +2,7 @@ import styles from './productStore.module.css';
 import Box from '@mui/material/Box';
 import { PropTypes } from 'prop-types';
 import Grid from '@mui/material/Grid';
-import ProductCard from '../productCard/ProductCard';
+import ProductCard from '../productCard';
 import PaginationRounded from './paginationRounded';
 
 const ProductStore = ({ items, setItems, setActivePage, activePage, loading }) => {
