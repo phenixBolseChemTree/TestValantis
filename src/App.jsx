@@ -6,6 +6,9 @@ import loadingImg from './img/loading.gif';
 import postIDS from './api/postIDS';
 import postITEMS from './api/postITEMS';
 import postFILTER from './api/postFILTER';
+import { ToastContainer, toast } from 'react-toastify';
+import { Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ITEMS_PER_PAGE = 50;
 
@@ -13,6 +16,18 @@ const isNumeric = (n) => !isNaN(parseFloat(n)) && isFinite(n);
 
 const hasNoCyrillic = (str) => !/[\u0400-\u04FF]/.test(str);
 
+const notifyNothing = () =>
+  toast.error('Ничего не найдено 😢', {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light',
+    transition: Bounce
+  });
 const filterUniqueById = (array) => {
   return array.filter((obj, index, self) => {
     const firstIndex = self.findIndex((item) => item.id === obj.id);
@@ -37,6 +52,8 @@ function App() {
         setItems(filterUniqueById(result));
       } else {
         let ids;
+        setLoading(true);
+
         if (isNumeric(input)) {
           ids = await postFILTER(Number(input), 'price');
         } else if (hasNoCyrillic(input)) {
@@ -45,19 +62,37 @@ function App() {
           ids = await postFILTER(input, 'product');
         }
         if (ids.result.length !== 0) {
-          setLoading(true);
+          // setLoading(true);
           const startSlice = ITEMS_PER_PAGE * (activePage - 1);
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
           const { result } = await postITEMS(idsSlice);
           setItems(filterUniqueById(result));
+        } else {
+          notifyNothing();
         }
       }
       setLoading(false);
     };
-
     fetchData();
   }, [activePage, input]);
+
+  // если ничего не найдено то нужно выводить сообщение об этом через tostyfy
+  // useEffect(() => {
+  //   if (!loading) {
+  //     toast('🦄 Wow so easy!', {
+  //       position: 'top-right',
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: 'light',
+  //       transition: Bounce
+  //     });
+  //   }
+  // }, loading);
   return (
     <div className="App">
       <div className="SearchSortWidget-container">
@@ -79,6 +114,7 @@ function App() {
           setLoading={setLoading}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 }
