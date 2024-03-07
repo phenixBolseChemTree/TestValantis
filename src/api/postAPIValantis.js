@@ -31,7 +31,7 @@ const postAPIValantis = async (method, params) => {
         'X-Auth': authString
       }
     });
-    console.log('response!!!', response.data);
+    // console.log('response!!!', response.data);
     return response.data;
   } catch (error) {
     // console.log(`countConnect post123${method} `, countConnect);
