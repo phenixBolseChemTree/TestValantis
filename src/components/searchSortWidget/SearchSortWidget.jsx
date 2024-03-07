@@ -26,7 +26,9 @@ const SearchSortWidget = ({ setInput }) => {
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
+    console.log('e.target.value!!!', e.target.value);
     setSearchText(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleKeyDown = (e) => {
@@ -50,15 +52,6 @@ const SearchSortWidget = ({ setInput }) => {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
-        {/* <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedOption}
-          onChange={handleSelectChange}>
-          <MenuItem value={'Ten'}>Ten</MenuItem>
-          <MenuItem value={'Twenty'}>Twenty</MenuItem>
-          <MenuItem value={'Thirty'}>Thirty</MenuItem>
-        </Select> */}
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Бренды</InputLabel>
@@ -66,9 +59,10 @@ const SearchSortWidget = ({ setInput }) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={selectedOption}
+              variant="outlined"
               onChange={handleSelectChange}>
               <MenuItem value={'Ten'}>Ten</MenuItem>
-              <MenuItem value={'Twenty'}>Twenty</MenuItem>
+              <MenuItem value={'Jacob & Co'}>Jacob & Co</MenuItem>
               <MenuItem value={'Thirty'}>Thirty</MenuItem>
             </Select>
           </FormControl>

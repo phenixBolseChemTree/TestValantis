@@ -16,7 +16,7 @@ const hasNoCyrillic = (str) => !/[\u0400-\u04FF]/.test(str);
 
 const notifyNothing = () =>
   toast.error('Ничего не найдено 😢', {
-    position: 'top-right',
+    position: 'bottom-right',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
