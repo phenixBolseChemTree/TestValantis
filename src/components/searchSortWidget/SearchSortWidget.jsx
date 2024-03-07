@@ -8,6 +8,7 @@ const SearchSortWidget = ({ setInput }) => {
   const [timeoutId, setTimeoutId] = useState(null);
 
   const handleInputChange = (e) => {
+    e.preventDefault();
     const newValue = e.target.value;
 
     clearTimeout(timeoutId);
@@ -20,6 +21,12 @@ const SearchSortWidget = ({ setInput }) => {
     setSearchText(newValue);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div className={styles.root}>
       <form style={{ width: '85%' }} noValidate autoComplete="off">
@@ -30,6 +37,7 @@ const SearchSortWidget = ({ setInput }) => {
           fullWidth
           value={searchText}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
       </form>
     </div>

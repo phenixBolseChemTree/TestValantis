@@ -46,10 +46,13 @@ function App() {
       if (!input) {
         setLoading(true);
         const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-        const ids = await postIDS(paramsCastome);
+        const ids = await postIDS(paramsCastome); // может вернуть пустой {result: []}
         const { result } = await postITEMS(ids.result);
-
-        setItems(filterUniqueById(result));
+        if (result.length !== 0) {
+          setItems(filterUniqueById(result));
+        } else {
+          notifyNothing();
+        }
       } else {
         let ids;
         setLoading(true);
@@ -67,7 +70,11 @@ function App() {
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
           const { result } = await postITEMS(idsSlice);
-          setItems(filterUniqueById(result));
+          if (result.length !== 0) {
+            setItems(filterUniqueById(result));
+          } else {
+            notifyNothing();
+          }
         } else {
           notifyNothing();
         }
@@ -77,22 +84,6 @@ function App() {
     fetchData();
   }, [activePage, input]);
 
-  // если ничего не найдено то нужно выводить сообщение об этом через tostyfy
-  // useEffect(() => {
-  //   if (!loading) {
-  //     toast('🦄 Wow so easy!', {
-  //       position: 'top-right',
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: 'light',
-  //       transition: Bounce
-  //     });
-  //   }
-  // }, loading);
   return (
     <div className="App">
       <div className="SearchSortWidget-container">
