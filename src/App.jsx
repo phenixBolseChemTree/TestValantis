@@ -3,12 +3,10 @@ import './App.css';
 import ProductStore from './components/productStore';
 import SearchSortWidget from './components/searchSortWidget';
 import loadingImg from './img/loading.gif';
-import postIDS from './api/postIDS';
-import postITEMS from './api/postITEMS';
-import postFILTER from './api/postFILTER';
 import { ToastContainer, toast } from 'react-toastify';
 import { Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import postAPIValantis from './api/postAPIValantis';
 
 const ITEMS_PER_PAGE = 50;
 
@@ -46,8 +44,11 @@ function App() {
       if (!input) {
         setLoading(true);
         const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-        const ids = await postIDS(paramsCastome); // может вернуть пустой {result: []}
-        const { result } = await postITEMS(ids.result);
+        // const ids = await postIDS(paramsCastome); // может вернуть пустой {result: []}
+        const ids = await postAPIValantis('get_ids', paramsCastome); // может вернуть пустой {result: []}
+        // const { result } = await postITEMS(ids.result);
+        const params = { ids: ids.result };
+        const { result } = await postAPIValantis('get_items', params);
         if (result.length !== 0) {
           setItems(filterUniqueById(result));
         } else {
@@ -58,18 +59,23 @@ function App() {
         setLoading(true);
 
         if (isNumeric(input)) {
-          ids = await postFILTER(Number(input), 'price');
+          // ids = await postFILTER(Number(input), 'price'); // input inpitKEy
+          ids = await postAPIValantis('filter', { price: Number(input) }); // params: { [inputKey]: input }
         } else if (hasNoCyrillic(input)) {
-          ids = await postFILTER(input, 'brand');
+          // ids = await postFILTER(input, 'brand');
+          ids = await postAPIValantis('filter', { brand: input });
         } else {
-          ids = await postFILTER(input, 'product');
+          // ids = await postFILTER(input, 'product');
+          ids = await postAPIValantis('filter', { product: input });
         }
         if (ids.result.length !== 0) {
           // setLoading(true);
           const startSlice = ITEMS_PER_PAGE * (activePage - 1);
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
-          const { result } = await postITEMS(idsSlice);
+          // const { result } = await postITEMS(idsSlice);
+          const params = { ids: idsSlice };
+          const { result } = await postAPIValantis('get_items', params);
           if (result.length !== 0) {
             setItems(filterUniqueById(result));
           } else {
