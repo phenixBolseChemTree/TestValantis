@@ -44,9 +44,7 @@ function App() {
       if (!input) {
         setLoading(true);
         const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-        // const ids = await postIDS(paramsCastome); // может вернуть пустой {result: []}
         const ids = await postAPIValantis('get_ids', paramsCastome); // может вернуть пустой {result: []}
-        // const { result } = await postITEMS(ids.result);
         const params = { ids: ids.result };
         const { result } = await postAPIValantis('get_items', params);
         if (result.length !== 0) {
@@ -59,13 +57,10 @@ function App() {
         setLoading(true);
 
         if (isNumeric(input)) {
-          // ids = await postFILTER(Number(input), 'price'); // input inpitKEy
           ids = await postAPIValantis('filter', { price: Number(input) }); // params: { [inputKey]: input }
         } else if (hasNoCyrillic(input)) {
-          // ids = await postFILTER(input, 'brand');
           ids = await postAPIValantis('filter', { brand: input });
         } else {
-          // ids = await postFILTER(input, 'product');
           ids = await postAPIValantis('filter', { product: input });
         }
         if (ids.result.length !== 0) {

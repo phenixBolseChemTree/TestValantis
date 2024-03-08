@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import styles from './paginationRounded.module.css';
 
 const PaginationRounded = ({ setActivePage, activePage, loading }) => {
+  // const count = loading === 'items' ? 161 : 10;
+  const count = 161;
+  // console.log('loading!!!', loading);
   const handleChange = (event, value) => {
-    // console.log('activePage! ', activePage);
     if (activePage !== value || !loading) {
       window.scrollTo({ top: 0 });
       setActivePage(value);
@@ -19,7 +21,7 @@ const PaginationRounded = ({ setActivePage, activePage, loading }) => {
         <Pagination
           disabled={loading}
           onChange={handleChange}
-          count={220}
+          count={count}
           variant="outlined"
           shape="rounded"
         />
