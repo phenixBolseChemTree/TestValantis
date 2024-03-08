@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './searchSortWidget.module.css';
 import TextField from '@mui/material/TextField';
 import { Select, Box, FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
+import postAPIValantis from '../../api/postAPIValantis';
 
 const SearchSortWidget = ({ setInput }) => {
   const [searchText, setSearchText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [timeoutId, setTimeoutId] = useState(null);
+  const [brands, setBrands] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const params = { field: 'brand' };
+      const ids = await postAPIValantis('get_fields', params);
+      const filtredIds = ids.result.filter((item) => item !== null);
+      setBrands(filtredIds);
+    };
+    fetchData();
+  }, []);
 
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -61,9 +73,12 @@ const SearchSortWidget = ({ setInput }) => {
               value={selectedOption}
               variant="outlined"
               onChange={handleSelectChange}>
-              <MenuItem value={'Ten'}>Ten</MenuItem>
-              <MenuItem value={'Jacob & Co'}>Jacob & Co</MenuItem>
-              <MenuItem value={'Thirty'}>Thirty</MenuItem>
+              {brands &&
+                brands.map((brand, index) => (
+                  <MenuItem key={index} value={brand}>
+                    {brand}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
         </Box>
