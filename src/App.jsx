@@ -34,13 +34,6 @@ const filterUniqueById = (array) => {
   });
 };
 
-// const filterArrUnique = (array) => {
-//   return array.filter((item, index, self) => {
-//     const firstIndex = self.findIndex((item2) => item2 === item);
-//     return index === firstIndex;
-//   });
-// };
-
 function App() {
   const [items, setItems] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -91,7 +84,6 @@ function App() {
             const startSlice = ITEMS_PER_PAGE * (activePage - 1);
             const endSlice = startSlice + 50;
             const idsSlice = ids.result.slice(startSlice, endSlice);
-            // console.log('!!!idsSlice', idsSlice);
             const params = { ids: idsSlice };
             const { result } = await postAPIValantis('get_items', params);
             if (result.length !== 0) {

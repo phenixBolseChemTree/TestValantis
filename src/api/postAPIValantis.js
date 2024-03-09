@@ -16,7 +16,6 @@ const url = process.env.REACT_APP_API_URL;
 let countConnect = 0;
 const authString = createAuthString(password);
 
-// method строка а data это параметры
 const postAPIValantis = async (method, params) => {
   if (countConnect === 10) {
     throw new Error('Number of connection attempts exceeded');
@@ -33,7 +32,6 @@ const postAPIValantis = async (method, params) => {
         'X-Auth': authString
       }
     });
-    // console.log('response!!!', response.data);
     return response.data;
   } catch (error) {
     console.log('error post${method}: ', error);
