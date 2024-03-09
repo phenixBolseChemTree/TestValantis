@@ -4,9 +4,11 @@ import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import styles from './paginationRounded.module.css';
 
-const PaginationRounded = ({ setActivePage, activePage, loading }) => {
-  // const count = loading === 'items' ? 161 : 10;
-  const count = 161;
+const PaginationRounded = ({ setActivePage, activePage, loading, input }) => {
+  console.log('PaginationRounded input!!!', input);
+  const count = !input ? 161 : 10;
+  // от количества постов должно зависить количество страниц
+  // const count = 161;
   // console.log('loading!!!', loading);
   const handleChange = (event, value) => {
     if (activePage !== value || !loading) {
@@ -15,10 +17,17 @@ const PaginationRounded = ({ setActivePage, activePage, loading }) => {
     }
   };
 
+  // useEffect(() => {
+  //   // setActivePage(1);
+  //   console.log('XYI');
+  //   setActivePage(0);
+  // }, [input]);
+
   return (
     <div className={styles.root123}>
-      <Stack spacing={2}>
+      <Stack spacing={0}>
         <Pagination
+          page={activePage}
           disabled={loading}
           onChange={handleChange}
           count={count}
@@ -33,7 +42,8 @@ const PaginationRounded = ({ setActivePage, activePage, loading }) => {
 PaginationRounded.propTypes = {
   setActivePage: PropTypes.func.isRequired,
   activePage: PropTypes.any,
-  loading: PropTypes.any
+  loading: PropTypes.any,
+  input: PropTypes.any
 };
 
 export default PaginationRounded;

@@ -17,7 +17,7 @@ const hasNoCyrillic = (str) => !/[\u0400-\u04FF]/.test(str);
 const notifyNothing = () =>
   toast.error('Ничего не найдено 😢', {
     position: 'bottom-right',
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -65,9 +65,14 @@ function App() {
         }
         if (ids.result.length !== 0) {
           // setLoading(true);
-          const startSlice = ITEMS_PER_PAGE * (activePage - 1);
+          const startSlice = ITEMS_PER_PAGE * (activePage - 1); // 1 - 1 = 0
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
+          // console.log('!!!activePage', activePage);
+          // console.log('!!!startSlice', startSlice);
+          // console.log('!!!ids', ids);
+          // console.log('!!!idsSlice', idsSlice);
+          // console.log('!!!input', input);
           // const { result } = await postITEMS(idsSlice);
           const params = { ids: idsSlice };
           const { result } = await postAPIValantis('get_items', params);
@@ -85,6 +90,12 @@ function App() {
     fetchData();
   }, [activePage, input]);
 
+  useEffect(() => {
+    // setActivePage(1);
+    setActivePage(1);
+    console.log('изменился INPUT!!!!!');
+  }, [input]);
+
   return (
     <div className="App">
       <div className="SearchSortWidget-container">
@@ -99,6 +110,7 @@ function App() {
       <div className="productStoreContainer">
         <ProductStore
           items={items}
+          input={input}
           setItems={setItems}
           setActivePage={setActivePage}
           activePage={activePage}
