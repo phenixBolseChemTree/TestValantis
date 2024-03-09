@@ -127,11 +127,20 @@ function App() {
         <SearchSortWidget input={input} setInput={setInput} />
       </div>
       {loading && (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div
+          style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: '9999',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
           <img className="loadingImg" style={{ width: '70px' }} src={loadingImg} alt="loading" />
         </div>
       )}
-
       <div className="productStoreContainer">
         <ProductStore
           items={items}
