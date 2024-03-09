@@ -5,7 +5,15 @@ import Grid from '@mui/material/Grid';
 import ProductCard from '../productCard';
 import PaginationRounded from './paginationRounded';
 
-const ProductStore = ({ items, setItems, setActivePage, activePage, loading, input }) => {
+const ProductStore = ({
+  items,
+  setItems,
+  setActivePage,
+  activePage,
+  loading,
+  input,
+  countPages
+}) => {
   return (
     <div className={styles.root}>
       <Box sx={{ flexGrow: 1 }}>
@@ -19,6 +27,7 @@ const ProductStore = ({ items, setItems, setActivePage, activePage, loading, inp
       </Box>
       {items.length > 0 && (
         <PaginationRounded
+          countPages={countPages}
           input={input}
           setItems={setItems}
           setActivePage={setActivePage}
@@ -44,7 +53,8 @@ ProductStore.propTypes = {
   setItems: PropTypes.func.isRequired,
   setActivePage: PropTypes.func.isRequired,
   loading: PropTypes.any,
-  setLoading: PropTypes.func.isRequired
+  setLoading: PropTypes.func.isRequired,
+  countPages: PropTypes.any
 };
 
 export default ProductStore;

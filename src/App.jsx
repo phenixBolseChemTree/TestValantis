@@ -34,12 +34,19 @@ const filterUniqueById = (array) => {
   });
 };
 
+// const filterArrUnique = (array) => {
+//   return array.filter((item, index, self) => {
+//     const firstIndex = self.findIndex((item2) => item2 === item);
+//     return index === firstIndex;
+//   });
+// };
+
 function App() {
   const [items, setItems] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [input, setInput] = useState('');
-  // const [countPages, setCountPages] = useState(161);
+  const [countPages, setCountPages] = useState(161);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +66,7 @@ function App() {
       // запрос с вводом input
       else {
         let ids;
+        setCountPages(10);
         setLoading(true);
 
         if (isNumeric(input)) {
@@ -69,15 +77,15 @@ function App() {
           ids = await postAPIValantis('filter', { product: input });
         }
         if (ids.result.length !== 0) {
+          const pages =
+            ids.result.length <= ITEMS_PER_PAGE ? 1 : Math.ceil(ids.result.length / ITEMS_PER_PAGE);
+
+          setCountPages(pages);
+
           const startSlice = ITEMS_PER_PAGE * (activePage - 1);
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
-          // console.log('!!!activePage', activePage);
-          // console.log('!!!startSlice', startSlice);
-          // console.log('!!!ids', ids);
-          // console.log('!!!idsSlice', idsSlice);
-          // console.log('!!!input', input);
-          // const { result } = await postITEMS(idsSlice);
+          console.log('!!!idsSlice', idsSlice);
           const params = { ids: idsSlice };
           const { result } = await postAPIValantis('get_items', params);
           if (result.length !== 0) {
@@ -97,6 +105,10 @@ function App() {
   useEffect(() => {
     // возврат на 1 страницу при новом input
     setActivePage(1);
+
+    if (input === '') {
+      setCountPages(161);
+    }
   }, [input]);
 
   return (
@@ -119,6 +131,7 @@ function App() {
           activePage={activePage}
           loading={loading}
           setLoading={setLoading}
+          countPages={countPages}
         />
       </div>
       <ToastContainer />
