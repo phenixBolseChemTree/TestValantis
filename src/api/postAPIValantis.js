@@ -7,6 +7,8 @@ const createAuthString = (password) => {
   return md5(`${password}_${timestamp}`);
 };
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 // env keys
 const password = process.env.REACT_APP_VALANTIS_PASS;
 const url = process.env.REACT_APP_API_URL;
@@ -16,8 +18,8 @@ const authString = createAuthString(password);
 
 // method строка а data это параметры
 const postAPIValantis = async (method, params) => {
-  if (countConnect === 5) {
-    return []; // нужно будет возвращать нихуя или ошибку
+  if (countConnect === 10) {
+    throw new Error('Number of connection attempts exceeded');
   }
 
   const data = {
@@ -36,6 +38,7 @@ const postAPIValantis = async (method, params) => {
   } catch (error) {
     console.log('error post${method}: ', error);
     countConnect += 1;
+    await delay(1000);
     return postAPIValantis(method, params);
   }
 };

@@ -14,8 +14,8 @@ const isNumeric = (n) => !isNaN(parseFloat(n)) && isFinite(n);
 
 const hasNoCyrillic = (str) => !/[\u0400-\u04FF]/.test(str);
 
-const notifyNothing = () =>
-  toast.error('Ничего не найдено 😢', {
+const notifyNothing = (message) =>
+  toast.error(message, {
     position: 'bottom-right',
     autoClose: 3000,
     hideProgressBar: false,
@@ -50,54 +50,64 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // запрос без ввода input
-      if (!input) {
-        setLoading(true);
-        const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
-        const ids = await postAPIValantis('get_ids', paramsCastome); // может вернуть пустой {result: []}
-        const params = { ids: ids.result };
-        const { result } = await postAPIValantis('get_items', params);
-        if (result.length !== 0) {
-          setItems(filterUniqueById(result));
-        } else {
-          notifyNothing();
-        }
-      }
-      // запрос с вводом input
-      else {
-        let ids;
-        setCountPages(10);
-        setLoading(true);
-
-        if (isNumeric(input)) {
-          ids = await postAPIValantis('filter', { price: Number(input) });
-        } else if (hasNoCyrillic(input)) {
-          ids = await postAPIValantis('filter', { brand: input });
-        } else {
-          ids = await postAPIValantis('filter', { product: input });
-        }
-        if (ids.result.length !== 0) {
-          const pages =
-            ids.result.length <= ITEMS_PER_PAGE ? 1 : Math.ceil(ids.result.length / ITEMS_PER_PAGE);
-
-          setCountPages(pages);
-
-          const startSlice = ITEMS_PER_PAGE * (activePage - 1);
-          const endSlice = startSlice + 50;
-          const idsSlice = ids.result.slice(startSlice, endSlice);
-          console.log('!!!idsSlice', idsSlice);
-          const params = { ids: idsSlice };
+      try {
+        // запрос без ввода input
+        if (!input) {
+          setLoading(true);
+          const paramsCastome = {
+            offset: ITEMS_PER_PAGE * (activePage - 1),
+            limit: ITEMS_PER_PAGE
+          };
+          const ids = await postAPIValantis('get_ids', paramsCastome); // может вернуть пустой {result: []}
+          const params = { ids: ids.result };
           const { result } = await postAPIValantis('get_items', params);
           if (result.length !== 0) {
             setItems(filterUniqueById(result));
           } else {
-            notifyNothing();
+            notifyNothing('Ничего не найдено 😢');
           }
-        } else {
-          notifyNothing();
         }
+        // запрос с вводом input
+        else {
+          let ids;
+          setCountPages(10);
+          setLoading(true);
+
+          if (isNumeric(input)) {
+            ids = await postAPIValantis('filter', { price: Number(input) });
+          } else if (hasNoCyrillic(input)) {
+            ids = await postAPIValantis('filter', { brand: input });
+          } else {
+            ids = await postAPIValantis('filter', { product: input });
+          }
+          if (ids.result.length !== 0) {
+            const pages =
+              ids.result.length <= ITEMS_PER_PAGE
+                ? 1
+                : Math.ceil(ids.result.length / ITEMS_PER_PAGE);
+
+            setCountPages(pages);
+
+            const startSlice = ITEMS_PER_PAGE * (activePage - 1);
+            const endSlice = startSlice + 50;
+            const idsSlice = ids.result.slice(startSlice, endSlice);
+            // console.log('!!!idsSlice', idsSlice);
+            const params = { ids: idsSlice };
+            const { result } = await postAPIValantis('get_items', params);
+            if (result.length !== 0) {
+              setItems(filterUniqueById(result));
+            } else {
+              notifyNothing('Ничего не найдено 😢');
+            }
+          } else {
+            notifyNothing('Ничего не найдено 😢');
+          }
+        }
+        setLoading(false);
+      } catch (error) {
+        notifyNothing('Проверьте подключение или перезагрузите страницу');
+        console.log('!!!error.message', error.message);
       }
-      setLoading(false);
     };
     fetchData();
   }, [activePage, input]);
