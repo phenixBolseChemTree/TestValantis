@@ -17,12 +17,6 @@ const PaginationRounded = ({ setActivePage, activePage, loading, input }) => {
     }
   };
 
-  // useEffect(() => {
-  //   // setActivePage(1);
-  //   console.log('XYI');
-  //   setActivePage(0);
-  // }, [input]);
-
   return (
     <div className={styles.root123}>
       <Stack spacing={0}>
@@ -44,6 +38,7 @@ PaginationRounded.propTypes = {
   activePage: PropTypes.any,
   loading: PropTypes.any,
   input: PropTypes.any
+  // countPages: PropTypes.any
 };
 
 export default PaginationRounded;

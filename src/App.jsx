@@ -26,6 +26,7 @@ const notifyNothing = () =>
     theme: 'light',
     transition: Bounce
   });
+
 const filterUniqueById = (array) => {
   return array.filter((obj, index, self) => {
     const firstIndex = self.findIndex((item) => item.id === obj.id);
@@ -38,9 +39,11 @@ function App() {
   const [activePage, setActivePage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [input, setInput] = useState('');
+  // const [countPages, setCountPages] = useState(161);
 
   useEffect(() => {
     const fetchData = async () => {
+      // запрос без ввода input
       if (!input) {
         setLoading(true);
         const paramsCastome = { offset: ITEMS_PER_PAGE * (activePage - 1), limit: ITEMS_PER_PAGE };
@@ -52,20 +55,21 @@ function App() {
         } else {
           notifyNothing();
         }
-      } else {
+      }
+      // запрос с вводом input
+      else {
         let ids;
         setLoading(true);
 
         if (isNumeric(input)) {
-          ids = await postAPIValantis('filter', { price: Number(input) }); // params: { [inputKey]: input }
+          ids = await postAPIValantis('filter', { price: Number(input) });
         } else if (hasNoCyrillic(input)) {
           ids = await postAPIValantis('filter', { brand: input });
         } else {
           ids = await postAPIValantis('filter', { product: input });
         }
         if (ids.result.length !== 0) {
-          // setLoading(true);
-          const startSlice = ITEMS_PER_PAGE * (activePage - 1); // 1 - 1 = 0
+          const startSlice = ITEMS_PER_PAGE * (activePage - 1);
           const endSlice = startSlice + 50;
           const idsSlice = ids.result.slice(startSlice, endSlice);
           // console.log('!!!activePage', activePage);
@@ -91,9 +95,8 @@ function App() {
   }, [activePage, input]);
 
   useEffect(() => {
-    // setActivePage(1);
+    // возврат на 1 страницу при новом input
     setActivePage(1);
-    console.log('изменился INPUT!!!!!');
   }, [input]);
 
   return (

@@ -34,7 +34,6 @@ const postAPIValantis = async (method, params) => {
     // console.log('response!!!', response.data);
     return response.data;
   } catch (error) {
-    // console.log(`countConnect post123${method} `, countConnect);
     console.log('error post${method}: ', error);
     countConnect += 1;
     return postAPIValantis(method, params);
