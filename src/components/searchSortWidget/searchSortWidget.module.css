@@ -1,19 +1,26 @@
 .root {
   /* background-color: rgb(196, 196, 196); */
-  height: 100px;
+  height: 80px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   display: flex;
-  /* background-color: red; */
+  background-color: rgb(201, 201, 201);
+
+  /* Adjust the blur amount as needed */
+  /* background: rgba(255, 0, 0, 0.9); */
+  /* Red color with 0.9 opacity */
+  padding: 4px;
+  /* Adjust padding as needed */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
 }
 
 @media (min-width: 320px) {
   .root {
     position: fixed;
-    height: 100px;
+    height: 80px;
     bottom: 0;
   }
 }

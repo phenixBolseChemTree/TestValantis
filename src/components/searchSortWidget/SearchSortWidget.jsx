@@ -56,6 +56,7 @@ const SearchSortWidget = ({ setInput }) => {
         noValidate
         autoComplete="off">
         <TextField
+          style={{ marginRight: 5 }}
           id="outlined-basic"
           label="Введите название цену или бренд"
           variant="outlined"
