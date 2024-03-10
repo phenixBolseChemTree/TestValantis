@@ -57,7 +57,7 @@ function App() {
           if (result.length !== 0) {
             setItems(filterUniqueById(result));
           } else {
-            notifyNothing('Ничего не найдено 😢');
+            notifyNothing('Ничего не найдено 111 😢');
           }
         }
         // запрос с вводом input
@@ -89,10 +89,10 @@ function App() {
             if (result.length !== 0) {
               setItems(filterUniqueById(result));
             } else {
-              notifyNothing('Ничего не найдено 😢');
+              notifyNothing('Ничего не найдено 222 😢');
             }
           } else {
-            notifyNothing('Ничего не найдено 😢');
+            notifyNothing('Ничего не найдено 333 😢');
           }
         }
         setLoading(false);

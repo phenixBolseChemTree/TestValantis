@@ -6,19 +6,27 @@ import Typography from '@mui/material/Typography';
 
 const ProductCard = ({ item, loading }) => {
   return (
-    <Card sx={{ minWidth: 150, height: '200px' }}>
+    <Card style={{ position: 'relative' }} sx={{ minWidth: 150, height: '200px' }}>
       {!loading && (
         <CardContent>
-          <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ fontSize: 8 }} color="text.secondary" gutterBottom>
             {item.id}
           </Typography>
-          <Typography sx={{ fontSize: 14 }} component="div">
+          <Typography sx={{ fontSize: 16 }} component="div">
             {item.product}
           </Typography>
-          <Typography sx={{ fontSize: 14, color: 'brown' }} component="div">
-            {item.brand}
+          <Typography
+            sx={{ fontSize: 13, display: 'flex', flexWrap: 'nowrap' }}
+            variant="subtitle1">
+            Цена: {item.price}
           </Typography>
-          <Typography variant="subtitle1">{item.price}</Typography>
+          {item.brand && (
+            <Typography
+              sx={{ fontSize: 13, color: 'brown', display: 'flex', flexWrap: 'nowrap' }}
+              component="div">
+              Бренд: {item.brand}
+            </Typography>
+          )}
         </CardContent>
       )}
     </Card>
