@@ -16,7 +16,10 @@ const SearchSortWidget = ({ setInput }) => {
     const fetchData = async () => {
       const params = { field: 'brand' };
       const ids = await postAPIValantis('get_fields', params);
-      const filtredIds = ids.result.filter((item) => item !== null);
+      // const filtredIds = ids.result.filter((item) => item !== null);
+      const filtredIds = ids.result.reduce((acc, item) => {
+        return item !== null && !acc.includes(item) ? [...acc, item] : acc;
+      }, []);
       setBrands(filtredIds);
     };
     fetchData();
@@ -72,7 +75,7 @@ const SearchSortWidget = ({ setInput }) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={selectedOption}
-              variant="outlined"
+              label="Бренды"
               onChange={handleSelectChange}>
               {brands &&
                 brands.map((brand, index) => (
