@@ -9,6 +9,7 @@
   background-color: rgb(244, 244, 244);
   padding: 4px;
   border-radius: 8px;
+  z-index: 3;
 }
 
 @media (min-width: 320px) {

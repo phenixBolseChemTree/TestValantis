@@ -15,15 +15,11 @@ const ProductCard = ({ item, loading }) => {
           <Typography sx={{ fontSize: 16 }} component="div">
             {item.product}
           </Typography>
-          <Typography
-            sx={{ fontSize: 13, display: 'flex', flexWrap: 'nowrap' }}
-            variant="subtitle1">
+          <Typography sx={{ fontSize: 13 }} variant="subtitle1">
             Цена: {item.price}
           </Typography>
           {item.brand && (
-            <Typography
-              sx={{ fontSize: 13, color: 'brown', display: 'flex', flexWrap: 'nowrap' }}
-              component="div">
+            <Typography sx={{ fontSize: 13, color: 'brown' }} component="div">
               Бренд: {item.brand}
             </Typography>
           )}
