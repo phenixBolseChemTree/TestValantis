@@ -6,42 +6,21 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  background-color: rgb(201, 201, 201);
-
-  /* Adjust the blur amount as needed */
-  /* background: rgba(255, 0, 0, 0.9); */
-  /* Red color with 0.9 opacity */
+  background-color: rgb(244, 244, 244);
   padding: 4px;
-  /* Adjust padding as needed */
   border-radius: 8px;
-  /* Optional: Add border-radius for rounded corners */
 }
 
 @media (min-width: 320px) {
   .root {
     position: fixed;
     height: 80px;
-    bottom: 0;
+    top: 0;
   }
 }
 
 @media (min-width: 700px) {
   .textField {
     width: 400px;
-  }
-
-  .root {
-    position: static;
-    bottom: auto;
-    height: 120px;
-  }
-}
-
-
-@media (min-width: 1320px) {
-
-  .root {
-    height: 130px;
-    width: 1220px;
   }
 }
