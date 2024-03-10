@@ -30,9 +30,9 @@ const PaginationRounded = ({ setActivePage, activePage, loading, countPages }) =
 
 PaginationRounded.propTypes = {
   setActivePage: PropTypes.func.isRequired,
-  activePage: PropTypes.any,
-  loading: PropTypes.any,
-  countPages: PropTypes.any
+  activePage: PropTypes.number,
+  loading: PropTypes.bool,
+  countPages: PropTypes.number
 };
 
 export default PaginationRounded;

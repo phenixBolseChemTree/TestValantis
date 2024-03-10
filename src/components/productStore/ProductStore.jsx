@@ -48,13 +48,13 @@ const ItemPropTypes = PropTypes.shape({
 
 ProductStore.propTypes = {
   items: PropTypes.arrayOf(ItemPropTypes.isRequired).isRequired,
-  input: PropTypes.any,
-  activePage: PropTypes.any,
+  input: PropTypes.string,
+  activePage: PropTypes.number,
   setItems: PropTypes.func.isRequired,
   setActivePage: PropTypes.func.isRequired,
-  loading: PropTypes.any,
+  loading: PropTypes.bool,
   setLoading: PropTypes.func.isRequired,
-  countPages: PropTypes.any
+  countPages: PropTypes.number
 };
 
 export default ProductStore;
